@@ -1,21 +1,14 @@
 "use strict";
 
 window.onload = function() {
-    // You can copy-and-paste the code from any of the examples at http://examples.phaser.io here.
-    // You will need to change the fourth parameter to "new Phaser.Game()" from
-    // 'phaser-example' to 'game', which is the id of the HTML element where we
-    // want the game to go.
-    // The assets (and code) can be found at: https://github.com/photonstorm/phaser/tree/master/examples/assets
-    // You will need to change the paths you pass to "game.load.image()" or any other
-    // loading functions to reflect where you are putting the assets.
-    // All loading functions will typically all be found inside "preload()".
     
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
 
 
 
     function preload() {
-        // Load an image and call it 'logo'.
+        // I learned how to load assets from the logo example that phaser came with.
+        // This is a heavily modified version of the main.js that came with that demo.
         game.load.image( 'logo', 'assets/phaser.png' );
         game.load.image('background', 'assets/GrassPhotoRepeat1(256).jpg');
         game.load.image( 'maggy', 'assets/Maggy01(64).png' );
@@ -25,20 +18,17 @@ window.onload = function() {
         game.load.audio('deathSound', 'assets/mud-splat.wav');
     }
     
-    //var bouncy;
     var maggySprite;
     var smileySprite;
     var moveSpeed = 4;
     var knives = new Array(4);
     var bricks = new Array(10);
-    var oThresh = 10;
     var text;
     var knivesGroup;
     var bricksGroup;
     var attacking;
     var splat;
     var soundStop;
-    var reseting;
     
     function create() {
 
@@ -57,6 +47,8 @@ window.onload = function() {
         knivesGroup = this.game.add.group();
         bricksGroup = this.game.add.group();
 
+        // I used this demo to figure out how to play sounds:
+        // https://phaser.io/examples/v2/audio/sound-complete
         splat = game.add.audio('deathSound');
         soundStop = false;
 
@@ -92,7 +84,8 @@ window.onload = function() {
         }
 
         attacking = false;
-        setTimeout(reset, 1000);
+
+        reset();
     }
 
     function death() {
@@ -106,12 +99,12 @@ window.onload = function() {
 
         attacking = false;
 
-        var t = 0;
-
         reset();
     }
 
     function reset() {
+        knivesGroup.setAll('body.velocity.x', 0);
+
         knives[0].x = 0;
         knives[0].y = 0;
 
@@ -127,6 +120,14 @@ window.onload = function() {
         smileySprite.x = game.rnd.realInRange(50, 750);
         smileySprite.y = game.rnd.realInRange(50, 550);
 
+        for(var i = 0; i < bricks.length; i++) {
+            bricks[i].x = game.rnd.realInRange(50, 750);
+            bricks[i].y = game.rnd.realInRange(50, 550);
+        }
+
+        maggySprite.x = game.world.centerX;
+        maggySprite.y = game.world.centerY;
+
         text.setText("Don't get stabbed!");
         
         attacking = true;
@@ -138,7 +139,6 @@ window.onload = function() {
         var randY = game.rnd.realInRange(50, 550);
         smileySprite = game.add.sprite(randX, randY, 'smiley');
         smileySprite.scale.setTo(0.5, 0.5);
-
         game.physics.enable(smileySprite, Phaser.Physics.ARCADE);
     }
 
@@ -170,6 +170,8 @@ window.onload = function() {
         }
     }
 
+    // I used this tutorial to figure out how to move sprites towards a target:
+    // http://www.html5gamedevs.com/topic/10664-move-sprite-towards-another-sprite/
     function attack() {
         var attackSpeed;
 
