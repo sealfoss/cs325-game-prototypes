@@ -19,6 +19,7 @@ window.onload = function() {
         game.load.image( 'T_smiley', 'assets/smiley(128).png' );
     }
 
+    
     var killWait = 60 * 3;
     var resetWait = 60 * 5;
     var antCount = 10;
@@ -37,16 +38,20 @@ window.onload = function() {
     var won = false;
     var lost = false;
     var deads = new Array(antCount + 1);
+    var squishCount;
 
     var text;
     
     function create() {
+        squishCount = antCount / 2;
 
         //I got this text section from the default phaser demo.
         var style = { font: "25px Verdana", fill: "00000", align: "center" };
-        text = game.add.text( game.world.centerX, 15, "DON'T GET SQUEESHED!", style );
+        text = game.add.text( game.world.centerX, 15, "DON'T GET SQUEESHED! - " 
+        + squishCount + " SQEESHES LEFT!", style );
         text.anchor.setTo( 0.5, 0.0 );
         game.stage.backgroundColor = "ffffff";
+
 
         // initialize the goal
         goal = game.add.sprite(100, 100, 'T_smiley');
@@ -58,6 +63,7 @@ window.onload = function() {
         initAnts();
 
         splat = game.add.audio('S_splat');
+        
     }
     
     function update() {
@@ -124,12 +130,18 @@ window.onload = function() {
     function killAnt(ant) {
 
         if(deads[ant] == false) {
+            squishCount -= 1;
             ants[ant].alpha = 0;
             splats[ant] = game.add.sprite(ants[ant].x, ants[ant].y, 'T_splat');
             splats[ant].anchor.setTo(0.5, 0.5);
             splats[ant].scale.setTo(0.7, 0.7);
             splat.play();
             deads[ant] = true;
+            text.setText("DON'T GET SQUEESHED! - " + squishCount + " SQEESHES LEFT!");
+
+            if(squishCount < 1) {
+                win();
+            }
         }
     }
 
