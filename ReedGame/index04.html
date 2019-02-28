@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/phaser.min.js"></script>
+    		<script src="da4/boot.js"></script>
+		<script src="da4/preload.js"></script>
+		<script src="da4/gametitle.js"></script>
+		<script src="da4/thegame.js"></script>
+		<script src="da4/gameover.js"></script>
+		<script src="da4/main.js"></script>	
+    		<style>
+    			body{margin:0}
+    		</style>
+		<script>
+			(function() {
+				var game = new Phaser.Game(1000, 800, Phaser.CANVAS, "game");
+				game.state.add("Boot",boot);
+				game.state.add("Preload",preload);
+				game.state.add("GameTitle",gameTitle);
+				game.state.add("TheGame",theGame);
+				game.state.add("GameOver",gameOver);
+				game.state.add("main");
+				game.state.start("Boot");
+			})();    
+		</script>
+
+    
+<style>
+body
+{
+    color: #777;
+    font-family: "Avenir", Verdana, sans-serif;
+}
+#readme
+{
+    margin-top: 10px;
+}
+</style>
+
+</head>
+<body>
+<div id="game"></div>
+<div id="readme">
+<h2>Flappy Guy</h2>
+
+<ul>
+<li><strong>Originality:</strong>
+</li>
+<li>Flappy bird is a much more advanced version of this game. #facts</li>
+
+<li><strong>Technical Merit:</strong>
+</li>
+<li>The flappy guy flaps and plays a sound at the same time.</li>
+
+<li><strong>Prototype Postmortem:</strong></li>
+<li>Figuring out states was a lot harder for me than I thought it would be. Lot of trial and error. In the end, though, I feel like I've gotten a good handle on it.</li>
+
+<li><strong>Prototype Assets:</strong>
+<ul>
+<li>All graphics were made from scratch.</li><li> I used a Jump sound effect from FreeSound.org</li>
+<li>I used the code and tutorial from this address to build my "game" https://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/</li>
+</ul>
+</li>
+
+<li><strong>Prototype Closest Other Game:</strong>
+</li>
+<li> Flappy Bird?</li>
+
+<li><strong>High Concept:</strong></li>
+<li>Be a flappy guy, don't get zapped!.</li>
+
+<li><strong>Theme:</strong>
+You're a flappy guy in a lightening storm! 
+</li>
+
+<li><strong>Mandated Variety:</strong>
+</li>
+<li>Initial position of all the ants is random, as is the movement of all NPC ants.</li>
+
+<li><strong>Prototype Goal:</strong></li>
+<li>Effectively use game states to manage the flow of play..</li>
+
+<li><strong>Player Experience Goals:</strong>
+</li>
+<li>Effectively navigate a main menu, game play, and game over states.</li>
+
+<li><strong>Gameplay:</strong>
+</li>
+<li>One player. You must left click on flappy guy to get him to fly. The objective is to avoid the lightening bolt. Flap your wings to freedom!</li>
+
+<li><strong>Strategies:</strong>
+</li>
+<li>Flap your wings at the appropriate times in order to avoid the lightening bolt.</li>
+
+<li><strong>Story/Setting/Premise:</strong>
+</li>
+<li>Flappy guy is flapping through the sky, when out of nowhere there's a lightening storm! Watch out for the lightening! Don't get zapped!</li>
+
+
+<li><strong>Target Audience:</strong>
+</li>
+<li>People who like chance, and as little interactivity as possible in their video games.</li>
+
+<li><strong>Play Time:</strong>
+</li>
+<li>Seconds, max.</li>
+</ul>
+
+</div>
+</body>
+</html>
