@@ -145,6 +145,7 @@ Level01.prototype = {
         this.initStabber(400, 100);
         this.initStabber(1000, 800);
         this.initStabber(1600, 800);
+        this.initStabber(900, 100);
     },
     initStabber: function(posX, posY) {
         var Stabber = this.game.add.sprite(posX, posY, "IMG_Stabby");
@@ -162,6 +163,7 @@ Level01.prototype = {
         this.buildPlatform((4*64), 900-(4*64), 6);
         this.buildPlatform(0, 900-(7*64), 3);
         this.buildPlatform(700, 900-(6*64), 4);
+        this.buildPlatform(800, 128, 4);
         this.buildPlatform((5*64), 900-(10*64), 6);
         this.buildPlatform(1800 - (64*4), 900-(7*64), 4);
         this.buildPlatform(1800 - (9*64), 900-(10*64), 3);
